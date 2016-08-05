@@ -3,14 +3,104 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title></title>
+    <title>AnyJoint</title>
     <script src="js/mui.min.js"></script>
-    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/mui.css" rel="stylesheet"/>
+    <style>
+    .logo-area{
+    		margin-top: 30px ;
+    		text-align: center;
+    }
+	.mui-input-row{
+		text-align: center;
+	}
+	#login-form{
+		margin-top:30px ;
+	}
+    	#account{
+    		width: 90%;
+    		border-bottom-left-radius: 0px;
+    		border-bottom-right-radius: 0px;
+    		border-top-left-radius: 16px;
+    		border-top-right-radius: 16px;
+    		margin:0;
+    		height: 46px;
+    	}
+    	#password{
+    		width: 90%;
+    		border-top-width: 0;
+    		border-bottom-left-radius: 16px;
+    		border-bottom-right-radius: 16px;
+    		border-top-left-radius: 0px;
+    		border-top-right-radius: 0px;
+    		margin:0;
+    		height: 46px;
+    	}
+    	.mui-input-row .mui-input-password ~ .mui-icon-eye{
+    		right:5%;
+    	}
+    	#submit-button{
+    		margin: 35px 0;
+    		width:90%;
+    		border-radius: 20px;
+    		height: 40px;
+    	}
+	.link-area{
+		display: block;
+		margin-top: 25px;
+		text-align: center;
+	}
+	.link-area > a:link {
+		color:#8f8f94;
+		font-size: 14px;
+	}
+	.span-content-color{
+		color:#8f8f94;
+	}
+	.span-pname-color{
+		color:#f5b12d;
+	}
+	.logo-area img{
+		width: 70px;
+		border-radius: 10px;
+	}
+	.logo-area h4{
+		margin-top: 20px;
+		font-family: simhei;
+	}
+    </style>
     <script type="text/javascript" charset="utf-8">
       	mui.init();
     </script>
 </head>
 <body>
-	
+	<div class="mui-content">
+		<div class="logo-area">
+			<img src="image/logo.png"/>
+			<h4>
+				<span class="span-content-color">————— </span>
+				欢迎使用
+				<span class="span-pname-color">AnyJoint</span>
+				<span class="span-content-color"> —————</span>
+			</h4>
+		</div>
+		<form id="login-form">
+			<div class="mui-input-row" >
+				<input id="account" type="text" placeholder="AnyJoint账号"/>
+			</div>
+			<div class="mui-input-row">
+				<input id="password" class="mui-input-password" type="password" placeholder="密码">
+			</div>
+			<div class="mui-button-row">
+				<button id="submit-button"type="button" class="mui-btn mui-btn-success">立即登录</button>
+			</div>
+		</form>
+		<div class="link-area">
+			<a id='reg' href="login.html">注册AnyJoint账号</a> 
+			<span class="spliter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+			<a id='forgetPassword' href="login.html">忘记密码？</a>
+		</div>
+		
+	</div>
 </body>
 </html>
