@@ -54,9 +54,6 @@
 		color:#8f8f94;
 		font-size: 14px;
 	}
-	.span-content-color{
-		color:#8f8f94;
-	}
 	.span-pname-color{
 		color:#f5b12d;
 	}
@@ -68,20 +65,39 @@
 		margin-top: 20px;
 		font-family: simhei;
 	}
-    </style>
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
+
+	#hr-left{
+		box-sizing:border-box;
+		display: inline;
+		float: left;
+		margin-left: 6%;
+		color:#8f8f94;
+		width:20%;
+		size:1px;
+	}
+	#hr-right{
+		box-sizing:border-box;
+		display: inline;
+		float: right;
+		margin-right: 6%;
+		color:#8f8f94;
+		width:20%;
+		size:1px;
+	}
+  </style>
 </head>
 <body>
 	<div class="mui-content">
 		<div class="logo-area">
 			<img src="image/logo.png"/>
+			
 			<h4>
-				<span class="span-content-color">————— </span>
-				欢迎使用
+				<!--<span class="span-content-color">—</span>-->
+				<hr id="hr-left">
+				<span>欢迎使用</span>
 				<span class="span-pname-color">AnyJoint</span>
-				<span class="span-content-color"> —————</span>
+				<hr id="hr-right">	
+				<!--<span class="span-content-color"> —————</span>-->
 			</h4>
 		</div>
 		<form id="login-form">
@@ -92,7 +108,7 @@
 				<input id="password" class="mui-input-password" type="password" placeholder="密码">
 			</div>
 			<div class="mui-button-row">
-				<button id="submit-button"type="button" class="mui-btn mui-btn-success">立即登录</button>
+				<button id="submit-button" type="button" class="mui-btn mui-btn-success">立即登录</button>
 			</div>
 		</form>
 		<div class="link-area">
@@ -100,7 +116,19 @@
 			<span class="spliter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
 			<a id='forgetPassword' href="login.html">忘记密码？</a>
 		</div>
-		
 	</div>
+<script type="text/javascript" charset="utf-8">
+	(function(mui,doc){
+		mui.init();
+		mui.plusReady(function(){
+			console.log("!!!!")
+			mui(".mui-button-row").on("tap","#submit-button",function(){
+				var account = mui("#account")[0].value;
+				var password = mui("#password")[0].value;
+				mui.openWindow('tab-webview-main.html','main',{})
+			})
+		});
+	})(mui,document);
+</script>
 </body>
 </html>

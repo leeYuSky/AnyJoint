@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			.drag-area{
+				width:100%
+			}
+			#hotmapChart{
+				height: 300px;
+				display: none;
+				width:300px;
+			}
+			#main-div{
+				width: 100%;
+				height: 260px;
+				background-color: #3C444F;
+				/*overflow: hidden;*/  
+				/*当不设置这个时,子元素设置margin父元素会跟随移动*/
+				/*因为此元素没有固定的宽度*/
+			}
+			.num-wrap {
+			  	position: relative;
+			  	width: 200px;
+				height: 200px;
+				top:30px;
+				margin: 0 auto;
+				border: 3px dotted #FFFFFF;
+				border-radius: 50%;
+				text-align: center;	
+				/*transform: rotateX(80deg);*/
+				/*-webkit-transform: rotateX(80deg);	/* Safari 和 Chrome */
+				/*-moz-transform: rotateX(80deg);*/*/
+			}
+			.num{
+				position: relative;
+				width: 200px;
+				height: 200px;
+				margin: 0 auto;
+				text-align: center;	
+				top:-100px;
+			}
+			.fuhao-C{
+				font-size: 14px;
+				color:#8f8f94;
+			}
+			.hotMap-area{
+				width:100%;
+				height:60px;
+				border-bottom: 1px solid #CCCCCC;
+			}
+			.hotMap-area h6{
+				line-height: 60px;
+				margin-left: 30px;	
+						
+			}
+			.hotMap-area h6 span{
+				margin-left: 0px;
+				margin-right: 20px;	
+			}
+			p{
+				text-indent: 2em;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div id="main-div" class="drag-area">
+				<div class="dot"></div>
+				<div class="num-wrap">
+				</div>
+				<div class="num">
+					<h1 style="color:#FFFFFF">28<span class="fuhao-C"> &#8451;</span></h1>
+					<h6>平均温度</h6>
+				</div>
+			</div>
+		    <div id="hot-area" class="drag-area">
+		    		<div class="hotMap-area">
+		    			<h6 id="hot-map"><span class="mui-icon mui-icon-image" style="color:#22A9C2"></span>
+		    				&nbsp;&nbsp;热力图
+		    			</h6>
+		    		</div>	
+		    	 	<div id="hotmapChart" >
+		    		</div>
+		    </div>
+		    <div id="press-area" class="drag-area">
+		    		<div class="hotMap-area">
+		    			<h6 id="press-map"><span class="mui-icon mui-icon-image" style="color:#5F71CE"></span>
+		    				&nbsp;&nbsp;压力图
+		    			</h6>
+		    		</div>
+		    		<div id="pressChart" style="display: none;">
+		    		</div>
+		    </div>
+		    <div class="drag-area">
+		    		<div class="mui-card" style="background-color:#efeff4;">
+					<!--页眉，放置标题-->
+					<div class="mui-card-header">
+						<span class="mui-icon mui-icon-compose" style="color:#22A9C2"></span>
+						<span style="color:#22A9C2;font-size: 16px;">睡眠质量分析</span>
+					</div>
+					<!--内容区-->
+					<div class="mui-card-content">
+						<p>睡眠是指大脑为了将刺激和刺激联结分配固化给相应神经细胞
+						（重整信息）的需要，把兴奋点（注意）暂且转移到原先兴奋
+						强度较弱的神经细胞，并由那些神经细胞接管人体的大部分生
+						命活动，而原先接受处理内外刺激并做出反应的兴奋度较高的
+						神经细胞因防止没有经过深加工的刺激联结相互干扰（信息过
+						载），（也可以理解为生化能量有限而醒着时这些神经细胞以
+						接受和处理刺激，创建和调用刺激联结为主，睡眠时以整理、
+						过滤和固化刺激联结为主），必须大部分屏蔽内外刺激对这些
+						神经细胞的作用的必要的生命过程。</p>
+					</div>
+				</div>
+		    </div>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/echarts.min.js"></script>
+	<!--<script src="http://s0.qhimg.com/lib/jquery/183.js" ></script>-->
+	
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		var byId = function(id) {
+			return document.getElementById(id);
+		};
+		
+		var getOption = function() {
+			var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
+        '7a', '8a', '9a','10a','11a',
+        '12p', '1p', '2p', '3p', '4p', '5p',
+        '6p', '7p', '8p', '9p', '10p', '11p'];
+var days = ['Saturday', 'Friday', 'Thursday',
+        'Wednesday', 'Tuesday', 'Monday', 'Sunday'];
+
+var data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8,0],[0,9,0],[0,10,0],[0,11,2],[0,12,4],[0,13,1],[0,14,1],[0,15,3],[0,16,4],[0,17,6],[0,18,4],[0,19,4],[0,20,3],[0,21,3],[0,22,2],[0,23,5],[1,0,7],[1,1,0],[1,2,0],[1,3,0],[1,4,0],[1,5,0],[1,6,0],[1,7,0],[1,8,0],[1,9,0],[1,10,5],[1,11,2],[1,12,2],[1,13,6],[1,14,9],[1,15,11],[1,16,6],[1,17,7],[1,18,8],[1,19,12],[1,20,5],[1,21,5],[1,22,7],[1,23,2],[2,0,1],[2,1,1],[2,2,0],[2,3,0],[2,4,0],[2,5,0],[2,6,0],[2,7,0],[2,8,0],[2,9,0],[2,10,3],[2,11,2],[2,12,1],[2,13,9],[2,14,8],[2,15,10],[2,16,6],[2,17,5],[2,18,5],[2,19,5],[2,20,7],[2,21,4],[2,22,2],[2,23,4],[3,0,7],[3,1,3],[3,2,0],[3,3,0],[3,4,0],[3,5,0],[3,6,0],[3,7,0],[3,8,1],[3,9,0],[3,10,5],[3,11,4],[3,12,7],[3,13,14],[3,14,13],[3,15,12],[3,16,9],[3,17,5],[3,18,5],[3,19,10],[3,20,6],[3,21,4],[3,22,4],[3,23,1],[4,0,1],[4,1,3],[4,2,0],[4,3,0],[4,4,0],[4,5,1],[4,6,0],[4,7,0],[4,8,0],[4,9,2],[4,10,4],[4,11,4],[4,12,2],[4,13,4],[4,14,4],[4,15,14],[4,16,12],[4,17,1],[4,18,8],[4,19,5],[4,20,3],[4,21,7],[4,22,3],[4,23,0],[5,0,2],[5,1,1],[5,2,0],[5,3,3],[5,4,0],[5,5,0],[5,6,0],[5,7,0],[5,8,2],[5,9,0],[5,10,4],[5,11,1],[5,12,5],[5,13,10],[5,14,5],[5,15,7],[5,16,11],[5,17,6],[5,18,0],[5,19,5],[5,20,3],[5,21,4],[5,22,2],[5,23,0],[6,0,1],[6,1,0],[6,2,0],[6,3,0],[6,4,0],[6,5,0],[6,6,0],[6,7,0],[6,8,0],[6,9,0],[6,10,1],[6,11,0],[6,12,2],[6,13,1],[6,14,3],[6,15,4],[6,16,0],[6,17,0],[6,18,0],[6,19,0],[6,20,1],[6,21,2],[6,22,2],[6,23,6]];
+
+data = data.map(function (item) {
+    return [item[1], item[0], item[2] || '-'];
+});
+
+option = {
+    tooltip: {
+        position: 'top'
+    },
+    animation: false,
+    grid: {
+        height: '50%',
+        y: '10%'
+    },
+    xAxis: {
+        type: 'category',
+        data: hours,
+        splitArea: {
+            show: true
+        }
+    },
+    yAxis: {
+        type: 'category',
+        data: days,
+        splitArea: {
+            show: true
+        }
+    },
+    visualMap: {
+        min: 0,
+        max: 10,
+        calculable: true,
+        orient: 'horizontal',
+        left: 'center',
+        bottom: '15%'
+    },
+    series: [{
+        name: 'Punch Card',
+        type: 'heatmap',
+        data: data,
+        label: {
+            normal: {
+                show: true
+            }
+        },
+        itemStyle: {
+            emphasis: {
+                shadowBlur: 10,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+    }]
+};
+return option;
+		};
+		
+		var hotmap = echarts.init(byId('hotmapChart'));
+		hotmap.setOption(getOption());
+		
+	</script>
+	<script>
+	mui.plusReady(function(){
+		
+		mui("#hot-area")[0].addEventListener("tap",function(){
+
+			if(mui("#hotmapChart")[0].style.display == "none"){
+				mui("#hotmapChart")[0].style.display = "block";
+				mui("#press-area")[0].style["border-top"] = "1px solid #CCCCCC";
+			}else{
+				mui("#hotmapChart")[0].style.display = "none";	
+				mui("#press-area")[0].style["border-top"] = "none";
+			}
+		});
+		//隐藏滚动条
+		plus.webview.currentWebview().setStyle({scrollIndicator:"none"});
+		
+		console.log(window.scrollY);
+		var deltaCount = 0;
+		mui("div").on("drag",".drag-area",function(e){
+//			console.log(e.detail.deltaY);
+			deltaCount = window.scrollY / 130 * 90;
+//			if(e.detail.deltaY < 0){
+//				deltaCount = deltaCount + 2;
+//				if(deltaCount > 90){
+//					deltaCount = 90;
+//				}
+//			}else{
+//				deltaCount = deltaCount - 2;
+//				if(deltaCount < 0){
+//					deltaCount = 0;
+//				}
+//			}
+			if(deltaCount <= 90 && deltaCount >= 0){
+				mui(".num-wrap")[0].style.transform = "rotateX("+deltaCount+"deg)";
+			}else if(deltaCount >90){
+				mui(".num-wrap")[0].style.transform = "rotateX(90deg)";
+			}
+			if(window.scrollY < 130){
+				mui(".num-wrap")[0].style.top = (window.scrollY*0.8 + 30)+"px";
+				mui(".num")[0].style.top = (window.scrollY * 0.6 -100)+"px";
+			}
+		})
+	});
+	</script>
+</html>
