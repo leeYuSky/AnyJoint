@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>AnyJoint</title>
-    <script src="js/mui.min.js"></script>
     <link href="css/mui.css" rel="stylesheet"/>
     <style>
     .logo-area{
@@ -50,7 +49,7 @@
 		margin-top: 25px;
 		text-align: center;
 	}
-	.link-area > a:link {
+	.link-area > a {
 		color:#8f8f94;
 		font-size: 14px;
 	}
@@ -61,11 +60,12 @@
 		width: 70px;
 		border-radius: 10px;
 	}
+	
 	.logo-area h4{
 		margin-top: 20px;
 		font-family: simhei;
 	}
-
+	
 	#hr-left{
 		box-sizing:border-box;
 		display: inline;
@@ -75,6 +75,7 @@
 		width:20%;
 		size:1px;
 	}
+	
 	#hr-right{
 		box-sizing:border-box;
 		display: inline;
@@ -112,16 +113,26 @@
 			</div>
 		</form>
 		<div class="link-area">
-			<a id='reg' href="login.html">注册AnyJoint账号</a> 
+			<a id='reg' href="reg.html">注册AnyJoint账号</a> 
 			<span class="spliter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-			<a id='forgetPassword' href="login.html">忘记密码？</a>
+			<a id='forgetPassword' href="reg.html">忘记密码？</a>
 		</div>
 	</div>
+<script src="js/mui.min.js"></script>
+<sccipt src="js/app.js"></sccipt>
 <script type="text/javascript" charset="utf-8">
 	(function(mui,doc){
 		mui.init();
 		mui.plusReady(function(){
-			console.log("!!!!")
+			console.log("!!!!");
+			plus.screen.lockOrientation("portrait-primary");
+//					var settings = app.getSettings();
+//					var state = app.getState();
+//					console.log(settings);
+					var mainPage = mui.preload({
+						"id": 'main',
+						"url": 'tab-webview-main.html'
+					});
 			mui(".mui-button-row").on("tap","#submit-button",function(){
 				var account = mui("#account")[0].value;
 				var password = mui("#password")[0].value;
