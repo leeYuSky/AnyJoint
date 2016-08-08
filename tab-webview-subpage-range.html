@@ -44,10 +44,10 @@
 				        <div class="mui-input-row mui-input-range field-contain">
 				            <div style="float:left">
 				                <label >区域一：</label>
-				                <input type="text" id='field-range-input' value='28'>
+				                <input type="text" id='field-range-input0' value='28'>
 				            </div>
 				            <div style="margin-left:111px;">
-				                <input type="range" id='field-range' value="28" min="16" max="36" />
+				                <input type="range" id='field-range0' value="28" min="16" max="36" />
 				            </div>
 				        </div>   
 					</li>
@@ -55,10 +55,10 @@
 				        <div class="mui-input-row mui-input-range field-contain">
 				            <div style="float:left">
 				                <label >区域二：</label>
-				                <input type="text" id='field-range-input' value='28'>
+				                <input type="text" id='field-range-input1' value='28'>
 				            </div>
 				            <div style="margin-left:111px;">
-				                <input type="range" id='field-range' value="28" min="16" max="36" />
+				                <input type="range" id='field-range1' value="28" min="16" max="36" />
 				            </div>
 				        </div>   
 					</li>
@@ -66,10 +66,10 @@
 				        <div class="mui-input-row mui-input-range field-contain">
 				            <div style="float:left">
 				                <label >区域三：</label>
-				                <input type="text" id='field-range-input' value='28'>
+				                <input type="text" id='field-range-input2' value='28'>
 				            </div>
 				            <div style="margin-left:111px;">
-				                <input type="range" id='field-range' value="28" min="16" max="36" />
+				                <input type="range" id='field-range2' value="28" min="16" max="36" />
 				            </div>
 				        </div>   
 					</li>
@@ -77,10 +77,10 @@
 				        <div class="mui-input-row mui-input-range field-contain">
 				            <div style="float:left">
 				                <label >区域四：</label>
-				                <input type="text" id='field-range-input' value='28'>
+				                <input type="text" id='field-range-input3' value='28'>
 				            </div>
 				            <div style="margin-left:111px;">
-				                <input type="range" id='field-range' value="28" min="16" max="36" />
+				                <input type="range" id='field-range3' value="28" min="16" max="36" />
 				            </div>
 				        </div>   
 					</li>
@@ -88,10 +88,10 @@
 				        <div class="mui-input-row mui-input-range field-contain">
 				            <div style="float:left">
 				                <label >区域五：</label>
-				                <input type="text" id='field-range-input' value='28'>
+				                <input type="text" id='field-range-input4' value='28'>
 				            </div>
 				            <div style="margin-left:111px;">
-				                <input type="range" id='field-range' value="28" min="16" max="36" />
+				                <input type="range" id='field-range4' value="28" min="16" max="36" />
 				            </div>
 				        </div>   
 					</li>
@@ -99,10 +99,10 @@
 				        <div class="mui-input-row mui-input-range field-contain">
 				            <div style="float:left">
 				                <label >区域六：</label>
-				                <input type="text" id='field-range-input' value='28'>
+				                <input type="text" id='field-range-input5' value='28'>
 				            </div>
 				            <div style="margin-left:111px;">
-				                <input type="range" id='field-range' value="28" min="16" max="36" />
+				                <input type="range" id='field-range5' value="28" min="16" max="36" />
 				            </div>
 				        </div>   
 					</li>
@@ -110,10 +110,10 @@
 				        <div class="mui-input-row mui-input-range field-contain">
 				            <div style="float:left">
 				                <label >区域七：</label>
-				                <input type="text" id='field-range-input' value='28'>
+				                <input type="text" id='field-range-input6' value='28'>
 				            </div>
 				            <div style="margin-left:111px;">
-				                <input type="range" id='field-range' value="28" min="16" max="36" />
+				                <input type="range" id='field-range6' value="28" min="16" max="36" />
 				            </div>
 				        </div>   
 					</li>
@@ -121,10 +121,10 @@
 				        <div class="mui-input-row mui-input-range field-contain">
 				            <div style="float:left">
 				                <label >区域八：</label>
-				                <input type="text" id='field-range-input' value='28'>
+				                <input type="text" id='field-range-input7' value='28'>
 				            </div>
 				            <div style="margin-left:111px;">
-				                <input type="range" id='field-range' value="28" min="16" max="36" />
+				                <input type="range" id='field-range7' value="28" min="16" max="36" />
 				            </div>
 				        </div>   
 					</li>
@@ -132,10 +132,10 @@
 				        <div class="mui-input-row mui-input-range field-contain">
 				            <div style="float:left">
 				                <label >区域九：</label>
-				                <input type="text" id='field-range-input' value='28'>
+				                <input type="text" id='field-range-input8' value='28'>
 				            </div>
 				            <div style="margin-left:111px;">
-				                <input type="range" id='field-range' value="28" min="16" max="36" />
+				                <input type="range" id='field-range8' value="28" min="16" max="36" />
 				            </div>
 				        </div>   
 					</li>
@@ -152,9 +152,13 @@
 		
 		var rangeList = document.querySelectorAll('input[type="range"]');
 	    for(var i=0,len=rangeList.length;i<len;i++){
+
 	        rangeList[i].addEventListener('input',function(){
+	      		
 	            if(this.id.indexOf('field')>=0){
-	                document.getElementById(this.id+'-input').value = this.value;
+	        			var temp  = '-input' + (this.id).substr(((this.id).length - 1),1);
+//	        			console.log(temp);
+	                document.getElementById( ( (this.id).substr(0,((this.id).length - 1))+temp ) ).value = this.value;
 	            }else{
 	                document.getElementById(this.id+'-val').innerHTML = this.value;
 	            }
@@ -162,10 +166,14 @@
 	
 	        });
 	    }
-	
-	    document.getElementById('field-range-input').addEventListener('input',function(){
-	        document.getElementById('field-range').value = this.value;
-	    });
+
+	    for(var i=0,len=rangeList.length;i<len;i++){
+	    		
+		    document.getElementById('field-range-input'+i).addEventListener('input',function(){
+			var temp = (this.id).substr(((this.id).length - 1),1);
+		        document.getElementById('field-range'+temp).value = this.value;
+		    });
+		}
 		
 	
 	</script>
