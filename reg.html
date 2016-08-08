@@ -8,31 +8,45 @@
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/style.css" rel="stylesheet" />
 		<style>
-			.area {
-				margin: 20px auto 0px auto;
+			.mui-input-row{
+				text-align: center;
 			}
-			.mui-input-group:first-child {
-				margin-top: 20px;
+			#reg-form{
+				margin-top:30px ;
 			}
-			.mui-input-group label {
-				width: 22%;
-			}
-			.mui-input-row label~input,
-			.mui-input-row label~select,
-			.mui-input-row label~textarea {
-				width: 78%;
-			}
-			.mui-checkbox input[type=checkbox],
-			.mui-radio input[type=radio] {
-				top: 6px;
-			}
-			.mui-content-padded {
-				margin-top: 25px;
-			}
-			.mui-btn {
-				padding: 10px;
-			}
-			
+			#account{
+		    		width: 90%;
+		    		border-bottom-left-radius: 0px;
+		    		border-bottom-right-radius: 0px;
+		    		border-top-left-radius: 16px;
+		    		border-top-right-radius: 16px;
+		    		margin:0;
+		    		height: 46px;
+		    	}
+		    	#password,#password_confirm{
+		    		width: 90%;
+				border-radius: 0px;
+				border-top: none;
+		    		margin:0;
+		    		height: 46px;
+		    	}
+		    	#email{
+		    		width: 90%;
+		    		border-top-width: 0;
+		    		border-bottom-left-radius: 16px;
+		    		border-bottom-right-radius: 16px;
+		    		border-top-left-radius: 0px;
+		    		border-top-right-radius: 0px;
+		    		margin:0;
+		    		height: 46px;
+		    	}
+		    	
+		    	#reg{
+		    		margin: 35px 0;
+		    		width:90%;
+		    		border-radius: 20px;
+		    		height: 40px;
+		    	}
 		</style>
 	</head>
 
@@ -42,35 +56,40 @@
 			<h1 class="mui-title">注册</h1>
 		</header>
 		<div class="mui-content">
-			<form class="mui-input-group">
+			<form id="reg-form">
 				<div class="mui-input-row">
 					<!--<label>账号</label>-->
-					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入账号">
+					<input id='account' type="text"  placeholder="账号">
 				</div>
 				<div class="mui-input-row">
 					<!--<label>密码</label>-->
-					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+					<input id='password' type="password"  placeholder="密码">
 				</div>
 				<div class="mui-input-row">
 					<!--<label>确认</label>-->
-					<input id='password_confirm' type="password" class="mui-input-clear mui-input" placeholder="请确认密码">
+					<input id='password_confirm' type="password"  placeholder="确认密码">
 				</div>
 				<div class="mui-input-row">
 					<!--<label>邮箱</label>-->
-					<input id='email' type="email" class="mui-input-clear mui-input" placeholder="请输入邮箱">
+					<input id='email' type="email"  placeholder="邮箱">
+				</div>
+				<div class="mui-button-row">
+				<button id='reg' type="button" class="mui-btn mui-btn-success">立即注册</button>
 				</div>
 			</form>
+			<!--<div class="mui-content-padded">
+				<div class="mui-input-row">
+				<button id='reg' class="mui-btn mui-btn-primary">注册</button>
+				</div>
+			</div>-->
 			<div class="mui-content-padded">
-				<button id='reg' class="mui-btn mui-btn-block mui-btn-primary">注册</button>
+				<div style="text-align: center;width:90%;margin-left: 5%;">
+				<p >点击立即注册，即表示您同意并愿意遵守AnyJoint
+					<b style="color:#000000;">用户协议</b>和
+					<b style="color:#000000;">隐私政策</b>。
+				</p>
+				</div>
 			</div>
-			<div class="mui-content-padded">
-				<p>注册真实可用，注册成功后的用户可用于登录，但是示例程序并未和服务端交互，用户相关数据仅存储于本地。</p>
-			</div>
-		</div>
-		<div class="mui-content">
-		    <form>
-		    	
-		    </form>
 		</div>
 		<script src="js/mui.min.js"></script>
 		<script src="js/app.js"></script>
@@ -78,6 +97,7 @@
 			(function($, doc) {
 				$.init();
 				$.plusReady(function() {
+					console.log("加载")
 					var settings = app.getSettings();
 					var regButton = doc.getElementById('reg');
 					var accountBox = doc.getElementById('account');
