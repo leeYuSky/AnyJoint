@@ -232,18 +232,19 @@
 	    } 
 	    
 	    mui.plusReady(function() {
+	    		console.log("加载range.html")
 	    		var account = app.getState().account;
 	    		var username = document.getElementById("username");
 	    		var time = document.getElementById("update-time");
 	    		var submitButton = document.getElementById("change-submit");
-	    		
+	    		console.log("account is :" + account);
 	    		username.innerText = account;
+	    		
 	    		time.innerText = CurentTime();
+	    		
 	    		submitButton.addEventListener("tap",function(){
 	    			plus.nativeUI.toast("数据修改成功");
 	    		});
-	    		
-	    		
 	    		
 	    });
 		

@@ -71,9 +71,8 @@
 		display: inline;
 		float: left;
 		margin-left: 6%;
-		color:#8f8f94;
 		width:20%;
-		size:1px;
+		border:0.5px solid #8f8f94;
 	}
 	
 	#hr-right{
@@ -81,9 +80,8 @@
 		display: inline;
 		float: right;
 		margin-right: 6%;
-		color:#8f8f94;
 		width:20%;
-		size:1px;
+		border:0.5px solid #8f8f94;
 	}
   </style>
 </head>
@@ -126,14 +124,14 @@
 //			swipeBack:true 
 		});
 		mui.plusReady(function(){
-			console.log("!!!!");
+			console.log("加载index.html");
 			
 			plus.screen.lockOrientation("portrait-primary");
 			
 			var settings = app.getSettings();
 			var state = app.getState();
-			console.log("settings:" + JSON.stringify(settings));
-			console.log("state:" + JSON.stringify(state));
+//			console.log("settings:" + JSON.stringify(settings));
+//			console.log("state:" + JSON.stringify(state));
 			
 			//预加载页面，可以直接获得webview引用
 			var mainPage = mui.preload({
@@ -148,6 +146,7 @@
 				setTimeout(function() {
 					mui.openWindow({
 						id: 'main',
+						createNew:true,
 						show: {
 							aniShow: 'pop-in'
 						},

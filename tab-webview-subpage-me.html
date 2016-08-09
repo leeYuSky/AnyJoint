@@ -10,26 +10,132 @@
 	<style>
 		#main-div{
 				width: 100%;
-				height: 250px;
-				background-color: #3C444F;
+				height: 200px;
+				/*background-color: #3C444F;*/
 				text-align: center;
 				/*overflow: hidden;*/  
 				/*当不设置这个时,子元素设置margin父元素会跟随移动*/
 				/*因为此元素没有固定的宽度*/
-			}
+		}
+		.mui-table-view a{
+			font-size: 12px;
+		}
+		.mui-table-view a span.msg{
+			color:  #8f8f94;
+		}
+		.mui-table-view a .mui-icon{
+			font-size: 17px;
+			margin-right: 20px;
+			
+		}
 	</style>
 	<body>
 		<div class="mui-content">
 		    <div id="main-div">
 		    		<img src="image/logo.png" style="width:100px;height: 100px;border-radius: 100px;margin-top:50px"/>
 		    		<h5>用户名</h5>
-		    		<div style="font-size: 12px;"><a>个人信息<span class="mui-icon mui-icon-arrowright"></span></a></div>
+		    		<div style="font-size: 10px;">
+		    			<a style="color: #8f8f94;">个人信息
+		    				<span class="mui-icon mui-icon-arrowright" style="font-size: 12px;"></span>
+		    			</a>
+		    		</div>
 		    </div>
+		    <!--<hr style="width: 90%;border: 0.5px solid #CCCCCC;">-->
+		    
+		    <ul class="mui-table-view" style="background-color: #efeff4;margin-top: 30px;">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" style="">
+						<span class="mui-icon mui-icon-email" ></span>
+						<span class="msg">新消息通知</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						<span class="mui-icon mui-icon-settings" ></span>
+						<span class="msg">通用</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						<span class="mui-icon mui-icon-chatbubble" ></span>
+						<span class="msg">意见反馈</span>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view" style="margin-top: 25px;background-color: #efeff4;">
+				<li class="mui-table-view-cell">
+					<a id="about" class="mui-navigate-right">
+						<span class="mui-icon mui-icon-help" ></span>
+						<span class="msg">关于AnyJoint</span>
+					</a>
+				</li>
+			</ul>
+			
+			<div class="mui-button-row" style="margin:30px 0">
+				<button id="exit" type="button" class="mui-btn mui-btn-danger mui-btn-outlined">退出登录</button>
+			</div>
 		</div>
-		
 		<script src="./js/mui.min.js"></script>
+		<script src="./js/app.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+			mui.plusReady(function(){
+				console.log("加载me.html");
+				var exitbutton = document.getElementById("exit");
+				exitbutton.addEventListener('tap', function() {
+					if (mui.os.ios) {
+	
+                        // 获取所有Webview窗口
+                        var curr = plus.webview.currentWebview();
+                        var wvs = plus.webview.all();
+                        for (var i = 0, len = wvs.length; i < len; i++) {
+                            //关闭除setting页面外的其他页面
+                            if (wvs[i].getURL() == curr.getURL())
+                                continue;
+                            plus.webview.close(wvs[i]);
+                        }
+                        //打开login页面后再关闭setting页面
+                               
+                            
+						app.setState({});
+						plus.webview.open('index.html');
+						curr.close();
+						return;
+					}
+					var btnArray = [{
+						title: "注销当前账号"
+					}, {
+						title: "直接关闭应用"
+					}];
+					plus.nativeUI.actionSheet({
+						cancel: "取消",
+						buttons: btnArray
+					}, function(event) {
+						var index = event.index;
+						switch (index) {
+							case 1:
+								var curr = plus.webview.currentWebview();
+                                var wvs = plus.webview.all();
+                                for (var i = 0, len = wvs.length; i < len; i++) {
+                                    //关闭除setting页面外的其他页面
+                                    if (wvs[i].getURL() == curr.getURL())
+                                        continue;
+                                    plus.webview.close(wvs[i]);
+                                }
+                                //打开login页面后再关闭setting页面
+                       
+      
+								app.setState({});
+								plus.webview.open('index.html');
+								curr.close();
+								break;
+							case 2:
+								plus.runtime.quit();
+								break;
+						}
+					});
+				}, false);
+			});
 		</script>
 	</body>
 
