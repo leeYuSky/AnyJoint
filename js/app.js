@@ -19,6 +19,7 @@
 			return callback('密码最短为 6 个字符');
 		}
 		var users = JSON.parse(localStorage.getItem('$users') || '[]');
+		// JavaScript数组some()方法测试数组中的某个元素是否通过由提供的功能来实现测试。
 		var authed = users.some(function(user) {
 			return loginInfo.account == user.account && loginInfo.password == user.password;
 		});
