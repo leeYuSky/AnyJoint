@@ -112,23 +112,28 @@
 				var exitbutton = document.getElementById("exit");
 				exitbutton.addEventListener('tap', function() {
 					if (mui.os.ios) {
-	
-                        // 获取所有Webview窗口
-                        var curr = plus.webview.currentWebview();
-                        var wvs = plus.webview.all();
-                        for (var i = 0, len = wvs.length; i < len; i++) {
-                            //关闭除setting页面外的其他页面
-                            if (wvs[i].getURL() == curr.getURL())
-                                continue;
-                            plus.webview.close(wvs[i]);
-                        }
-                        //打开login页面后再关闭setting页面
-                               
-                            
-						app.setState({});
-						plus.webview.open('index.html');
-						curr.close();
-						return;
+						 var btnArray = ['是', '否'];
+						 mui.confirm('您确定退出?', '', btnArray, function(e) {
+                    			if (e.index == 0) {
+			                        // 获取所有Webview窗口
+			                        var curr = plus.webview.currentWebview();
+			                        var wvs = plus.webview.all();
+			                        for (var i = 0, len = wvs.length; i < len; i++) {
+			                            //关闭除setting页面外的其他页面
+			                            if (wvs[i].getURL() == curr.getURL())
+			                                continue;
+			                            plus.webview.close(wvs[i]);
+			                        }
+			                        //打开login页面后再关闭setting页面
+			                               
+			                            
+									app.setState({});
+									plus.webview.open('index.html');
+									curr.close();
+
+							}
+                   		});
+                   		return;
 					}
 					var btnArray = [{
 						title: "注销当前账号"
@@ -144,6 +149,7 @@
 							case 1:
 								var curr = plus.webview.currentWebview();
                                 var wvs = plus.webview.all();
+                                plus.webview.open('index.html');
                                 for (var i = 0, len = wvs.length; i < len; i++) {
                                     //关闭除setting页面外的其他页面
                                     if (wvs[i].getURL() == curr.getURL())
@@ -154,7 +160,7 @@
                        
       
 								app.setState({});
-								plus.webview.open('index.html');
+//								plus.webview.open('index.html');
 								curr.close();
 								break;
 							case 2:
