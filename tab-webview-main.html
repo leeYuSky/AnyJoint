@@ -26,6 +26,9 @@
 			}
 			.mui-bar-nav{
 				height: 45px;
+				/*border-bottom: 0.5px solid #000000;*/
+			}
+			.myBorder{
 				border-bottom: 0.5px solid #000000;
 			}
 			.mui-bar-tab .mui-tab-item.mui-active{
@@ -99,6 +102,7 @@
 								var current = document.getElementsByTagName("header");
 								current[0].classList.remove("my-color1");
 								current[0].classList.add("my-color2");
+								current[0].classList.remove("myBorder");
 												
 						},false)
 					}else{
@@ -107,6 +111,7 @@
 								var current = document.getElementsByTagName("header");
 								current[0].classList.remove("my-color2");
 								current[0].classList.add("my-color1");
+								current[0].classList.add("myBorder");
 							
 						},false)
 					}
