@@ -34,7 +34,7 @@
 		<div class="mui-content">
 		    <div id="main-div">
 		    		<img src="image/logo.png" style="width:100px;height: 100px;border-radius: 100px;margin-top:50px"/>
-		    		<h5>用户名</h5>
+		    		<h5 id="username">用户名</h5>
 		    		<div style="font-size: 10px;">
 		    			<a style="color: #8f8f94;">个人信息
 		    				<span class="mui-icon mui-icon-arrowright" style="font-size: 12px;"></span>
@@ -82,6 +82,13 @@
 			mui.init();
 			mui.plusReady(function(){
 				console.log("加载me.html");
+				
+				var currentWebview = plus.webview.currentWebview();
+		    		currentWebview.addEventListener('show', function() {
+			    		var account = app.getState().account;
+		    			var username = document.getElementById("username");
+		    			username.innerText = account;
+				}, false);
 				
 				var feedbackbutton = document.getElementById("feedback");
 				feedbackbutton.addEventListener('tap',function(){
