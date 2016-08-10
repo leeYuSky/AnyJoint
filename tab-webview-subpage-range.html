@@ -25,22 +25,28 @@
 		        float: none;
 		        text-align: center;
 		    }
+		    .mui-table-view-cell label{
+		    		color:#8f8f94;
+		    }
+		    .mui-table-view-cell input[type=text]{
+		    		color: #8f8f94;
+		    }
 		</style>
 	</head>
 	<body>
 <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 	<div class="mui-scroll">
 		<div class="mui-content" id="continer">
-			<div class="mui-card">
+			<div class="mui-card" style="background-color: #efeff4">
 				<div class="mui-card-header mui-card-media">
 					<img src="./image/logo.png" / style="border-radius: 5px;">
 					<div class="mui-media-body">
-						<span id="username">用户名</span>
+						<span id="username" style="color:#8f8f94">用户名</span>
 						<p>数据更新时间 <span id="update-time">2016-06-30 15:30</span></p>
 					</div>
 				</div>
-				<div class="mui-card-content">
-				<ul class="mui-table-view">
+				<div class="mui-card-content" >
+				<ul class="mui-table-view" style="background-color: #efeff4">
 
 					<li class="mui-table-view-cell">
 				        <div class="mui-input-row mui-input-range field-contain">
@@ -157,6 +163,7 @@
 	<script src="./js/mui.min.js"></script>
 	<script src="./js/app.js"></script>
 	<script>
+		(function(mui){
 		mui.init({
 				//右滑关闭
 				swipeBack: true,
@@ -230,24 +237,39 @@
 	        clock += mm; 
 	        return(clock); 
 	    } 
-	    
+
+		window.addEventListener('show', function() {
+		    		var account = app.getState().account;
+	    			var username = document.getElementById("username");
+	    			username.innerText = account;
+			}, false);
+			
 	    mui.plusReady(function() {
-	    		console.log("加载range.html")
-	    		var account = app.getState().account;
-	    		var username = document.getElementById("username");
-	    		var time = document.getElementById("update-time");
+	    		console.log("加载range.html");
+	    		var currentWebview = plus.webview.currentWebview();
+	    		currentWebview.addEventListener('show', function() {
+		    		var account = app.getState().account;
+	    			var username = document.getElementById("username");
+	    			var time = document.getElementById("update-time");
+	    			username.innerText = account;
+	    			time.innerText = CurentTime();
+			}, false);
+//	    		var account = app.getState().account;
+//	    		var username = document.getElementById("username");
+//	    		var time = document.getElementById("update-time");
 	    		var submitButton = document.getElementById("change-submit");
-	    		console.log("account is :" + account);
-	    		username.innerText = account;
+//	    		console.log("account is :" + account);
 	    		
-	    		time.innerText = CurentTime();
+	    		
+//	    		time.innerText = CurentTime();
+	    		
 	    		
 	    		submitButton.addEventListener("tap",function(){
 	    			plus.nativeUI.toast("数据修改成功");
 	    		});
 	    		
 	    });
-		
+		})(mui);
 	
 	</script>
 </html>
